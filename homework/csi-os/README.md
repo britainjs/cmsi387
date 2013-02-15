@@ -21,6 +21,7 @@ kernel-mac.png
 kernel-windows.jpg
     A screenshot showing the Windows Vista (ewww) kernel, called ntoskrnl.exe in both 
     command prompt and the file's properties tab.
+    
 network-linux.png
     A screenshot of the network configuration panel in ubuntu with the ipv4 settings for
     a wired connection displayed in an options window in the foreground.
@@ -29,9 +30,14 @@ network-mac.png
     A screenshot of the network configuration panel in os x showing the tcp/ip tab.
     Located in System Preferences -> Network.
 
+network-windows.jpg
+    A screenshot of the network settings window in windows, showing the settings for a 
+    wireless connection.
+    
 startup-linux.png
     A screenshot of the startup scripts used by linux as shown by the ls command. These
     files are located in /etc/init.d
+    
 startup-mac-terminal.png
     A screenshot of the plist files os x uses on startup as shown by terminal. Located
     under System/Library/LaunchAgents.
