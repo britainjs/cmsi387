@@ -7,13 +7,17 @@ config-windows.jpg
 first-process-linux.png
     A screenshot of top in linux showing the first process loaded by the kernel, which is
     the bottom process named init with a PID of 1.
-
+first-process-windows.jpg
+    A screenshot showing the first process of Windows, the System Idle Process, running
+    in task manager.
 kernel-linux.png
     A screenshot of the long form file listing of the ubuntu kernel, which is called 
     vmlinuz-3.5.0.17-generic
+    
 kernel-mac.png
     A screenshot of the long form file listing of the os x kernel, which is called 
     mach_kernel.
+    
 network-linux.png
     A screenshot of the network configuration panel in ubuntu with the ipv4 settings for
     a wired connection displayed in an options window in the foreground.
