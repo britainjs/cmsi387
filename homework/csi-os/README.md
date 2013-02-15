@@ -1,7 +1,9 @@
 boot-linux.png
     A screenshot of the ubuntu boot loader, which allows you to select which operating
     system to boot.
-    
+config-windows.jpg
+    A screenshot of the configuration files Windows uses on startup. Located in 
+    C:\Windows\System32\config.    
 first-process-linux.png
     A screenshot of top in linux showing the first process loaded by the kernel, which is
     the bottom process named init with a PID of 1.
@@ -25,7 +27,7 @@ startup-linux.png
     files are located in /etc/init.d
 startup-mac-terminal.png
     A screenshot of the plist files os x uses on startup as shown by terminal. Located
-    under System\Library\LaunchAgents.
+    under System/Library/LaunchAgents.
     
 startup-mac.png
     The same files shown in a finder window.
