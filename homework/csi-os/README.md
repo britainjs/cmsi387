@@ -4,6 +4,10 @@ boot-linux.png
 boot-mac.JPG
     A photo of the boot loader for osx. It allows you to choose which drive or partition
     to boot from and is activated by holding the option key during boot.
+boot-windows.JPG
+    A photo of the boot loader for windows. It allows you to modify the boot order of the
+    computer, such as changing it to check the network, then the disc drive, then the hard
+    drive.
 config-windows.jpg
     A screenshot of the configuration files Windows uses on startup. Located in 
     C:\Windows\System32\config.    
