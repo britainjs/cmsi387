@@ -1,6 +1,9 @@
 boot-linux.png
     A screenshot of the ubuntu boot loader, which allows you to select which operating
-    system to boot.
+    system to boot. Activated by holding shift during boot.
+boot-mac.JPG
+    A photo of the boot loader for osx. It allows you to choose which drive or partition
+    to boot from and is activated by holding the option key during boot.
 config-windows.jpg
     A screenshot of the configuration files Windows uses on startup. Located in 
     C:\Windows\System32\config.    
