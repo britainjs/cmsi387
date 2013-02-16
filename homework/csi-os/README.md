@@ -10,6 +10,11 @@ config-windows.jpg
 first-process-linux.png
     A screenshot of top in linux showing the first process loaded by the kernel, which is
     the bottom process named init with a PID of 1.
+first-process-mac.png
+    A screenshot of Activity Manager showing the first process. Internet research suggests
+    that the first process loaded by the kernel is launchd, with a PID of 1. However, 
+    launchd lists kernel_task as its parent process and kernel_task has a PID of 0, which
+    makes it seem like it may be the first process (it seems to be the kernel itself). 
 first-process-windows.jpg
     A screenshot showing the first process of Windows, the System Idle Process, running
     in task manager.
