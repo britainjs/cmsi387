@@ -2,6 +2,7 @@
 #include <linux/unistd.h>
 #include <string.h>
 #include <sys/utsname.h>
+#include <stdio.h>
 
 int main(int argc, char *argv[]) {
     //Demonstrates the uname system call, which returns information about the system
