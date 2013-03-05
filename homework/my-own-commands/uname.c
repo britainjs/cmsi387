@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
     //A struct to hold the results of the system call.
     struct utsname systemInfo;
     //Now we invoke the system call.
+    // JD: You need a *pointer* to systemInfo here!
     int result = syscall(122, systemInfo);
     
     if(result == -1){
@@ -27,9 +28,11 @@ int main(int argc, char *argv[]) {
         printf("%s\n", systemInfo.nodename);
         
         //The os release version
+        // JD: ???? Missing semicolon below.
         printf("%s\n", systemInfo.release)
         
         //The os version number
+        // JD: Double ???? Now a missing rparen *and* semicolon!
         printf("%s\n", systemInfo.version
         
         //A hardware identifier
