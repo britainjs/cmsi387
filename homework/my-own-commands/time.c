@@ -11,9 +11,9 @@ int main(int argc, char *argv []) {
     // JD: Watch your data types and pointers!
     //     (i.e., know when to use pointers and when not to do so)
     //     (hint: You made the wrong choices below)
-    long int result;
+    long int* result;
     printf("%d\n", syscall(13, result) );
     
     //To show the use of the parameter
-    printf("%ld\n", result);
+    printf("%ld\n", *result);
 }
