@@ -32,19 +32,22 @@
         <p>
            Before building the kernel, you must set up your system to properly build
            and modify the kernel. This will involve acquiring some software
-           changing the configuration of the kernel. First type the following command.
-           <div style="text-indent: 1em;">
-               <b>sudo apt-get build-dep linux-image-$(uname -r)</b>
+           changing the configuration of the kernel. Type the following commands as
+           recommended by <a href="http://blog.avirtualhome.com/how-to-compile-a-new-ubuntu-11-10-oneiric-kernel">
+           this guide to kernel compilation</a>. 
+           <div >
+               <b>sudo su - <br>
+                apt-get install fakeroot build-essential<br>
+                apt-get install crash kexec-tools makedumpfile kernel-wedge<br>
+                apt-get build-dep linux-image-$(uname -r)<br>
+                apt-get install git libncurses5 libncurses5-dev libnewt-dev<br>
+                exit<br>
+               </b>
            </div>
         </p>
         <p> 
-           This will get you most of the packages needed to build the kernel. The
-           ubuntu wiki page for building a kernel makes use of the fakeroot command,
-           which you can get using the following command.
-           <div style="text-indent: 1em;">
-               <b>sudo apt-get fakeroot</b>
-           </div>
-        </p>
+           This will get you all the different packages needed to modify the configuration
+           and modify the kernel.
         <p>
            To modify the configuration, run the following commands. According to 
            the ubuntu wiki, this step is optional, but we will do it anyway.
