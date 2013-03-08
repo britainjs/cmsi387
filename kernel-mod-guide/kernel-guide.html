@@ -28,6 +28,81 @@
             modify a different kernel, you can change the <b>ubuntu-quantal.git</b>
             segment of the command to the desired release.
         </p>
+        <h2>Adding the System Call</h2>
+        <p>
+            To add a system call, you have to add some lines to a couple of files. All 
+            said and done it is not very much code, but the files can be hard to find.
+            The first one you want to work with is 
+            <div style="text-indent: 1em;">
+                <b>~/ubuntu-quantal/arch/x86/syscalls/syscall_32.tbl</b>
+            </div>
+        </p>
+        <p>
+            Note that this is for 32-bit operating systems. For 64-bit operating systems,
+            you will want to modify syscall_64.tbl, which is in the same directory.
+        </p>
+        <p>
+            To this file, you will want to add the following line:
+            <div style="text-indent: 1em;">
+                <b>350     i386   hello                 sys_hello</b>
+            </div>
+        </p>
+        <p>
+            This will add the intended system call to the kernel's table of system calls.
+            It should fall right after the call <b>349 kcmp</b>
+        </p>
+        <p>
+            Next you will want to navigate to 
+            <div style="text-indent: 1em;">
+                <b>~/ubuntu-quantal/include/linux/syscalls.h</b>
+            </div>
+        </p>
+        <p>
+            To that file, add the following line
+            <div style="text-indent: 1em;">
+                <b>asmlinkage long sys_hello(void);</b>
+            </div>
+        </p>
+        <p>
+            This defines the skeleton of the system call, which is included in other
+            files along with the meat of the code itself. Next we will add the actual 
+            file containing the system call. Navigate to the folder
+            <div style="text-indent: 1em;">
+                <b>~/ubuntu-quantal/kernel</b>
+            </div>
+        </p>
+        <p>
+            In this folder create a new folder called <b>hello</b>. Navigate to that 
+            folder, <b>~/ubuntu-quantal/kernel/hello</b>, and create a file called 
+            <b>hello.c</b>. In this file, write the following code:
+            <div>
+                <PRE><b>
+                #include &#60;linux/syscall.h>
+                
+                asmlinkage long sys_hello(void) {
+                    printk("Hello, World!\n");
+                    return 0;
+                }
+                </b></PRE>
+            </div>
+        </p>
+        <p>
+            This file contains the core of the system call. It is this file that tells
+            the system what to do when the call is invoked. In this case, it simply
+            emits "Hello, World!" into the kernel log.
+        </p>
+        
+        <p>
+            That is it in terms of creating the system call, but there are some other 
+            files to create or modify to help build the kernel. First, create a file in
+            <b>~/ubuntu-quantal/kernel/hello</b> called <b>Makefile</b>. This file should
+            contain the following code
+            <div style="text-indent: 1em;">
+                <b>obj-$(CONFIG_HELLO) += hello.o</b>
+            </div>
+        </p>
+                
+            
         <h2>Setting Up the Build Environment</h2>
         <p>
            Before building the kernel, you must set up your system to properly build
