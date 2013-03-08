@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     struct utsname systemInfo;
     //Now we invoke the system call.
     // JD: You need a *pointer* to systemInfo here!
-    int result = syscall(122, *systemInfo);
+    int result = syscall(122, &systemInfo);
     
     if(result == -1){
         //we hit an error
@@ -38,7 +38,5 @@ int main(int argc, char *argv[]) {
         //A hardware identifier
         printf("%s\n", systemInfo.machine);
         
-        //And the domain name
-        printf("%s\n", systemInfo.domainname);
     }
 }
