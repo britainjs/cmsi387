@@ -1,0 +1,92 @@
+<!doctype html>
+
+<!-- A bare-bones HTML5 file...perhaps as bare-bones as it can get. -->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>How to Modify the Ubuntu Kernel</title>
+    </head>
+    
+    <body>
+        <h1> How To Modify the Ubuntu Kernel</h1>
+        <h2>Assumptions</h2>
+        <p>
+           This guide assumes you are currently running ubuntu 12.1 and are planning on 
+           using the 3.5 kernel. It also assumes git is installed on the computer.
+        </p>
+        <h2>Getting The Kernel Source</h2>
+        <p>
+            To acquire the kernel, first open Terminal. Then type the following commands
+            <div style="text-indent: 1em;">
+                <b>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-quantal.git</b>
+            </div>
+        </p>
+        <p>
+            This will create a folder in the working directory containing the kernel. Bear
+            in mind this will take a while and takes up about 700 MB of disk space. Note 
+            that this command is specific to the ubuntu-quantal kernel. If you want to
+            modify a different kernel, you can change the <b>ubuntu-quantal.git</b>
+            segment of the command to the desired release.
+        </p>
+        <h2>Setting Up the Build Environment</h2>
+        <p>
+           Before building the kernel, you must set up your system to properly build
+           and modify the kernel. This will involve acquiring some software
+           changing the configuration of the kernel. First type the following command.
+           <div style="text-indent: 1em;">
+               <b>sudo apt-get build-dep linux-image-$(uname -r)</b>
+           </div>
+        </p>
+        <p> 
+           This will get you most of the packages needed to build the kernel. The
+           ubuntu wiki page for building a kernel makes use of the fakeroot command,
+           which you can get using the following command.
+           <div style="text-indent: 1em;">
+               <b>sudo apt-get fakeroot</b>
+           </div>
+        </p>
+        <p>
+           To modify the configuration, run the following commands. According to 
+           the ubuntu wiki, this step is optional, but we will do it anyway.
+           <div style="text-indent: 1em;">
+               <b>chmod a+x debian/scripts/*</b>
+           </div>
+           <div style="text-indent: 1em;">
+               <b>chmod a+x debian/scripts/misc/*</b>
+           </div>
+           <div style="text-indent: 1em;">
+               <b>fakeroot debian/rules clean</b>
+           </div>
+           <div style="text-indent: 1em;">
+               <b>fakeroot debian/rules editconfigs</b>
+           </div>
+        </p>
+        <h2>Building The Kernel</h2>
+        <p>
+            At this point we will actually build the kernel so that it can be
+            modified. This can be done by running three commands. Note that this 
+            also takes quite a while, so get comfortable.
+            <div style="text-indent: 1em;">
+               <b>cd ubuntu-quantal</b>
+               <small>Note that the name of the directory depends on the name of the
+               release.</small>
+           </div>
+           <div style="text-indent: 1em;">
+               <b>fakeroot debian/rules clean</b>
+           </div>
+           <div style="text-indent: 1em;">
+               <b>fakeroot binary-headers binary-generic</b>
+           </div>
+        </p>
+        <p>
+            If you have done everything correctly, you should see three package files
+            in the directory above the ubuntu-quantal directory (if you followed this
+            guide word for word it should be the home directory). These files will
+            all have the .deb extension.
+        </p>
+        <h2>Modifying The Kernel</h2>
+        <p>
+            Now we can get down to adding a system call.
+        </p
+    </body>
+</html>
