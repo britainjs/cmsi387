@@ -49,7 +49,8 @@
         </p>
         <p>
             This will add the intended system call to the kernel's table of system calls.
-            It should fall right after the call <b>349 kcmp</b>
+            It should fall right after the call <b>349 kcmp</b> Note that the <b>i386</b>
+            bit will be different if you are using a different processor architecture.
         </p>
         <p>
             Next you will want to navigate to 
@@ -78,6 +79,9 @@
             <div>
                 <PRE><b>
                 #include &#60;linux/syscall.h>
+                #include &#60;linux/init.h>
+                #include &#60;linux/kernel.h>
+                #include &#60;linux/linkage.h>
                 
                 asmlinkage long sys_hello(void) {
                     printk("Hello, World!\n");
@@ -101,6 +105,19 @@
                 <b>obj-$(CONFIG_HELLO) += hello.o</b>
             </div>
         </p>
+        
+        <p>
+            Now change to the directory <b>~/ubuntu-quantal/kernel</b> and create a file
+            called <b>Kconfig.hello</b>. In this file, type the following:
+            <PRE><b>
+                config HELLO
+                bool "emit Hello World"
+                default y
+                help
+                    "This file will emit Hello World into the kernel log"
+            <PRE><b>
+        </p>
+            
                 
             
         <h2>Setting Up the Build Environment</h2>
