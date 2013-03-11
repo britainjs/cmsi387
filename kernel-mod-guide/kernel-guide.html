@@ -115,9 +115,18 @@
                 default y
                 help
                     "This file will emit Hello World into the kernel log"
-            <PRE><b>
+            </PRE></b>
         </p>
+        
+        <p>
+            Finally move to the root directory of the kernel (<b>~/ubuntu-quantal/</b>)
+            and open the file called <b>Makefile</b>. In this file, edit the file so the 
+            line starting with <b>EXTRAVERSION</b> near the top reads
+            <PRE><b>
+                EXTRAVERSION =.syscall
+            </PRE></b>
             
+        </p>
                 
             
         <h2>Setting Up the Build Environment</h2>
@@ -139,7 +148,11 @@
         </p>
         <p> 
            This will get you all the different packages needed to modify the configuration
-           and modify the kernel.
+           and modify the kernel. Fakeroot is used to clean and start the build of the kernel, the 
+           build-dep linux-image-$(uname -r) is used in the process of actually building the
+           kernel, and libncurses5 is used in the config step to display the configuration
+           menu.
+        </p>
         <p>
            To modify the configuration, run the following commands. According to 
            the ubuntu wiki, this step is optional, but we will do it anyway.
@@ -179,9 +192,5 @@
             guide word for word it should be the home directory). These files will
             all have the .deb extension.
         </p>
-        <h2>Modifying The Kernel</h2>
-        <p>
-            Now we can get down to adding a system call.
-        </p
     </body>
 </html>
