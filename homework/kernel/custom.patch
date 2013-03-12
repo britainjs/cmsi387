@@ -1,0 +1,103 @@
+From 16dfd764f381dac31fb526ac6eac1e98ec6b7f40 Mon Sep 17 00:00:00 2001
+From: britainjs <britain@britain-VirtualBox.(none)>
+Date: Tue, 12 Mar 2013 14:30:34 +0800
+Subject: [PATCH 1/2] Made all the changes necessary to create a new system
+ call.
+
+---
+ Makefile                         |    2 +-
+ arch/x86/syscalls/syscall_32.tbl |    1 +
+ include/linux/syscalls.h         |    2 ++
+ 3 files changed, 4 insertions(+), 1 deletion(-)
+ mode change 100644 => 100755 debian/scripts/sub-flavour
+
+diff --git a/Makefile b/Makefile
+index fba8f97..46f9d63 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 3
+ PATCHLEVEL = 5
+ SUBLEVEL = 7
+-EXTRAVERSION = .6
++EXTRAVERSION = .syscall
+ NAME = Saber-toothed Squirrel
+ 
+ # *DOCUMENTATION*
+diff --git a/arch/x86/syscalls/syscall_32.tbl b/arch/x86/syscalls/syscall_32.tbl
+index 7a35a6e..56a9925 100644
+--- a/arch/x86/syscalls/syscall_32.tbl
++++ b/arch/x86/syscalls/syscall_32.tbl
+@@ -356,3 +356,4 @@
+ 347	i386	process_vm_readv	sys_process_vm_readv		compat_sys_process_vm_readv
+ 348	i386	process_vm_writev	sys_process_vm_writev		compat_sys_process_vm_writev
+ 349	i386	kcmp			sys_kcmp
++350     i386    hello                   sys_hello
+diff --git a/debian/scripts/sub-flavour b/debian/scripts/sub-flavour
+old mode 100644
+new mode 100755
+diff --git a/include/linux/syscalls.h b/include/linux/syscalls.h
+index 19439c7..24f7b6d 100644
+--- a/include/linux/syscalls.h
++++ b/include/linux/syscalls.h
+@@ -860,4 +860,6 @@ asmlinkage long sys_process_vm_writev(pid_t pid,
+ 
+ asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type,
+ 			 unsigned long idx1, unsigned long idx2);
++
+ #endif
++asmlinkage int sys_hello(void);
+-- 
+1.7.10.4
+
+
+From b2992008fa8b9a7ea385c0f32bd0e86d6c6d6e96 Mon Sep 17 00:00:00 2001
+From: britainjs <britain@britain-VirtualBox.(none)>
+Date: Tue, 12 Mar 2013 14:32:27 +0800
+Subject: [PATCH 2/2] added the files correctly
+
+---
+ kernel/Kconfig.hello  |    5 +++++
+ kernel/hello/Makefile |    1 +
+ kernel/hello/hello.c  |    9 +++++++++
+ 3 files changed, 15 insertions(+)
+ create mode 100644 kernel/Kconfig.hello
+ create mode 100644 kernel/hello/Makefile
+ create mode 100644 kernel/hello/hello.c
+
+diff --git a/kernel/Kconfig.hello b/kernel/Kconfig.hello
+new file mode 100644
+index 0000000..821c692
+--- /dev/null
++++ b/kernel/Kconfig.hello
+@@ -0,0 +1,5 @@
++config HELLO
++	bool "emit Hello World"
++	default y
++	help
++		This will emit Hello World into the kernel log
+diff --git a/kernel/hello/Makefile b/kernel/hello/Makefile
+new file mode 100644
+index 0000000..b9fc9c3
+--- /dev/null
++++ b/kernel/hello/Makefile
+@@ -0,0 +1 @@
++obj-$(CONFIG_HELLO) += hello.o
+diff --git a/kernel/hello/hello.c b/kernel/hello/hello.c
+new file mode 100644
+index 0000000..20cd497
+--- /dev/null
++++ b/kernel/hello/hello.c
+@@ -0,0 +1,9 @@
++#include <linux/syscalls.h>
++#include <linux/init.h>
++#include <linux/kernel.h>
++#include <linux/linkage.h>
++
++asmlinkage int sys_hello(void) {
++	printk("Hello, World!\n");
++	return 0;
++}
+-- 
+1.7.10.4
+
