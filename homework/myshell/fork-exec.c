@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 /**
  * This program demonstrates the use of the fork() and exec()
@@ -29,8 +30,12 @@ int main() {
         } else {
             /* Parent process. */
             int result;
-            if(command[strlen(command) - 1] != '&') {
+            if (command[strlen(command) - 1] != '&') {
                 wait(&result);
+            }
+            if (strcmp(command, "cd")  == 0) {
+                char* directory = getenv("HOME");
+                chdir(directory);
             }
             printf("All done; result = %d\n", result);
         }
