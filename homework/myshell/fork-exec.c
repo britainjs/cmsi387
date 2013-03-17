@@ -9,7 +9,7 @@
  * functions.
  */
 int main() {
-    //while(1){
+    while(1){
         /* String to hold the command to run. */
         char input[256];
         char command[256];
@@ -19,7 +19,7 @@ int main() {
         int length = 0;
 
         printf("Enter the command to run: ");
-        scanf("%[^\n]", input);
+        scanf("%[^\n]%*c", input);
         
         //find the command
         while(isspace(current) == 0) {
@@ -27,7 +27,6 @@ int main() {
             index = index + 1;
             current = input[index];
         }
-        //command[index + 1] = NULL;
         
         current = input[index + 1];
         index += 1;
@@ -40,13 +39,13 @@ int main() {
             newIndex = newIndex + 1;
             current = input[index];
         }
-        printf("%s\n", modifier);
+        
         /* Variable that will store the fork result. */
         pid_t pid;
         
         /* Perform the actual fork. */
         
-        //pid = fork();
+        pid = fork();
         if (pid < 0) {
             /* Error condition. */
             fprintf(stderr, "Fork failed\n");
@@ -58,17 +57,16 @@ int main() {
         } else {
             /* Parent process. */
             int result;
-            if (command[strlen(command) - 1] != '&') {
+            if (modifier[0] != '&') {
                 wait(&result);
             }
             if (strcmp(command, "cd")  == 0) {
-                char* directory = getenv("HOME");
-                chdir(directory);
+                chdir(modifier);
             }
             printf("All done; result = %d\n", result);
         }
 
-    //}
+    }
 
     return 0;
 }
