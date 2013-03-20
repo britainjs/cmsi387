@@ -53,6 +53,9 @@ int main() {
         } else if (pid == 0) {
             /* Child process. */
             printf("Running...\n");
+            if (strcmp(command, "cd")  == 0) {
+                chdir(modifier);
+            }
             execlp(command, command, NULL);
         } else {
             /* Parent process. */
@@ -60,9 +63,7 @@ int main() {
             if (modifier[0] != '&') {
                 wait(&result);
             }
-            if (strcmp(command, "cd")  == 0) {
-                chdir(modifier);
-            }
+            
             printf("All done; result = %d\n", result);
         }
 
