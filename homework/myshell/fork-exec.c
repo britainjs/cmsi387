@@ -39,12 +39,10 @@ int main() {
             newIndex = newIndex + 1;
             current = input[index];
         }
-        
         /* Variable that will store the fork result. */
         pid_t pid;
         
         /* Perform the actual fork. */
-        
         pid = fork();
         if (pid < 0) {
             /* Error condition. */
@@ -60,9 +58,11 @@ int main() {
         } else {
             /* Parent process. */
             int result;
+            
             if (modifier[0] != '&') {
                 wait(&result);
             }
+            
             
             printf("All done; result = %d\n", result);
         }
