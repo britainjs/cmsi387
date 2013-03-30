@@ -1,5 +1,14 @@
 1. The CD command updates the PWD bash variable, which stores the current working directory. In the custom shell, the variable is changed for the child process, if it even knows what the PWD variable is (i.e. you export it from bash). However, it the possible change never makes it back to the parent process. Therefor, in the custom shell we must call chdir() in order to simulate the function of cd.
 
+# JD: This is reasonable, but your code does not completely reflect this logic.
+#     You do invoke chdir instead of the executable, but you don't address the
+#     issue of how the change "never makes it back to the parent process."
+
 2. 
 
+# JD: Here's a big hint: you are actually *this close* to being able to run scripts.
+#     Just deal with what you say in #3 below, and you'll be set.
+
 3. Ctrl-D closes the current shell by simulating an EOF input, but since our custom shell is actually a C program simulating a shell, it just keeps looping after an EOF input is received. In order to implement this command, we would have to tell the program to stop looping if it receives an EOF command.
+
+# JD: Again, nicely put in writing, but not reflected in your code.

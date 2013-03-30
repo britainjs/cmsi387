@@ -33,6 +33,8 @@ int main() {
         int newIndex = 0;
         
         //find the modifier
+        // JD: What if the command has arguments (e.g., ls -l
+        //     or ping localhost)?
         while(isspace(current) == 0) {
             modifier[newIndex] = input[index];
             index = index + 1;
@@ -51,9 +53,13 @@ int main() {
         } else if (pid == 0) {
             /* Child process. */
             printf("Running...\n");
+            // JD: You are performing the cd here, in the child.  Think
+            //     about that...
             if (strcmp(command, "cd")  == 0) {
                 chdir(modifier);
             }
+            // JD: You should look up execlp (or the other forms of exec)
+            //     in order to call this completely correctly.
             execlp(command, command, NULL);
         } else {
             /* Parent process. */
