@@ -1,13 +1,11 @@
 /**
  * Public definitions for a bounded buffer.
  */
-#ifndef __BUFFER__
-#define __BUFFER__
+#ifndef __PHILO__
+#define __PHILO__
 
-typedef int buffer_item;
-
-#define BUFFER_SIZE 5
-#define ITEM_BOUND 10
+#define FORK_AMOUNT 5
+#define PHILOSOPHER_AMOUNT 10
 
 /**
  * Number of characters needed to display an item; it's essentially

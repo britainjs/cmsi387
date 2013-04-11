@@ -1,5 +1,5 @@
 /**
- * Producer implementation.
+ * Producer implementation. Spits out philosophers
  */
 #include "bb-cs.h"
 #include "bb-sync.h"
@@ -11,12 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void produce(int produceBound) {
+void exist(int producePhilo) {
     buffer_item item;
     while (1) {
         // Simulate a non-trivial produce.
-        randomwait(produceBound);
-        item = rand() % ITEM_BOUND;
+        randomwait(producePhilo);
         printf("Produced %d.\n", item);
 
         sem_wait(empty);

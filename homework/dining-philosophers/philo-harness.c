@@ -13,9 +13,7 @@ void *exist(int producePhilosopher);
  * Thread runner for the producer.
  */
 void *sitDown(void *arg) {
-    printf("Starting philosopher\n");
     produce((int)arg);
-    printf("Ending philosopher\n");
     pthread_exit(NULL);
 }
 
@@ -28,14 +26,16 @@ int main (int argc, char** argv) {
     
     initSync();
     
-    pthread *philosophers = malloc(sizeof(pthread) * 5);
+    pthread *philosophers = malloc(sizeof(pthread) * PHILOSOPHER_AMOUNT);
+    char** names = ["Aristotle", "Locke", "Kant", "Kierkegaard", "Hobbes"];
     
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     
     int i;
     for( i = 0; i < 5; i++ ) {
-        pthread_create(&philosophers[i], &attr, sitDown, (void *)5);
+        pthread_create(&philosophers[i], &attr, sitDown, (void *)i);
+        printf("%s has sat down", names[i]);
     }
     
     return 0;
