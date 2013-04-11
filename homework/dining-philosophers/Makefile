@@ -1,17 +1,15 @@
-bb: bb-harness.o bb-sync.o bb-cs.o consumer.o producer.o utility.o
+philo: philo-harness.o philo-sync.o philo-cs.o producer.o utility.o
 	gcc -o bb *.o -lpthread
 
-bb-harness.o: bb-sync.h
+philo-harness.o: philo-sync.h
 
-bb-cs.o: bb-cs.h buffer.h
+philo-cs.o: philo-cs.h philo.h
 
-bb-sync.o: bb-sync.h buffer.h
+philo-sync.o: philo-sync.h philo.h
 
-consumer.o: bb-cs.h bb-sync.h buffer.h utility.h
-
-producer.o: bb-cs.h bb-sync.h buffer.h utility.h
+producer.o: philo-cs.h philo-sync.h philo.h utility.h
 
 utility.o: utility.h
 
 clean:
-	rm bb *.o
+	rm philo *.o
