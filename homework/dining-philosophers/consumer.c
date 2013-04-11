@@ -1,9 +1,9 @@
 /**
  * Consumer implementation.
  */
-#include "bb-cs.h"
-#include "bb-sync.h"
-#include "buffer.h"
+#include "philo-cs.h"
+#include "philo-sync.h"
+#include "philo.h"
 #include "utility.h"
 
 #include <pthread.h>

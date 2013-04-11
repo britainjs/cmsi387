@@ -1,9 +1,9 @@
 /**
  * Producer implementation. Spits out philosophers
  */
-#include "bb-cs.h"
-#include "bb-sync.h"
-#include "buffer.h"
+#include "philo-cs.h"
+#include "philo-sync.h"
+#include "philo.h"
 #include "utility.h"
 
 #include <pthread.h>
@@ -11,14 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void exist(int producePhilo) {
-    buffer_item item;
+void exist(int philo) {
     while (1) {
         // Simulate a non-trivial produce.
-        randomwait(producePhilo);
-        printf("Produced %d.\n", item);
-
-        sem_wait(empty);
+        randomwait(philo);
+        getForks(philo);
         pthread_mutex_lock(&mutex);
         if (insert_item(item)) {
             fprintf(stderr, "***** Insert failed!\n");
@@ -29,3 +26,12 @@ void exist(int producePhilo) {
         sem_post(full);
     }
 }
+
+int left(int philosopher) {
+    return i;
+}
+
+int right(int philosopher) {
+    return (i+1) % PHILOSOPHER_AMOUNT;
+}
+

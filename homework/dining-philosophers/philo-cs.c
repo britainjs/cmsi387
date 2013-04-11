@@ -1,7 +1,7 @@
 /**
  * Implementation (and privates) for critical-section functions.
  */
-#include "bb-cs.h"
+#include "philo-cs.h"
 #include "philo.h"
 
 #include <stdio.h>
@@ -37,5 +37,6 @@ int putForks(int i) {
     printf("%s has put down fork %d\n", names[philosopher], forks[leftFork]);
     sem_post(forks[rightFork]);
     printf("%s has put down fork %d\n", names[philosopher], forks[rightFork]);
+    return 0;
 }
 

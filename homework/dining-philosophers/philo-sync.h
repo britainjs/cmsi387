@@ -1,8 +1,8 @@
 /**
  * Synchronization elements for a bounded buffer solution.
  */
-#ifndef __BB_SYNC__
-#define __BB_SYNC__
+#ifndef __PHILO_SYNC__
+#define __PHILO_SYNC__
 
 #include <pthread.h>
 #include <semaphore.h>

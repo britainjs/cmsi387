@@ -1,9 +1,9 @@
 /**
  * Synchronization primitive implementation.
  */
-#include "bb-sync.h"
+#include "philo-sync.h"
 
-#include "buffer.h"
+#include "philo.h"
 #ifdef __APPLE_CC__
 #include <fcntl.h>
 #endif
@@ -16,7 +16,7 @@ void initSync(void) {
     int i;
     for (i = 0; i < FORK_AMOUNT; i++) {
         forks[i] = &fork;
-        sem_init(forks[i], 0, 0);
+        sem_init(forks[i], 0, 1);
     }
     
 #else
