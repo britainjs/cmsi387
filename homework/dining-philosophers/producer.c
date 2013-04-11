@@ -13,17 +13,21 @@
 
 void exist(int philo) {
     while (1) {
-        // Simulate a non-trivial produce.
-        randomwait(philo);
+        // Simulate the normal activities of a philosopher at dinner.
+        //Think
+        printf("%s is thinking...", names[philo]);
+        randomwait(PHILOSOPHER_AMOUNT);
+        
         getForks(philo);
         pthread_mutex_lock(&mutex);
-        if (insert_item(item)) {
-            fprintf(stderr, "***** Insert failed!\n");
-            pthread_mutex_unlock(&mutex);
-            return;
-        }
+        
+        //Eat
+        printf("%s is eating...", names[philo]);
+        randomwait(PHILOSOPHER_AMOUNT);
         pthread_mutex_unlock(&mutex);
-        sem_post(full);
+        
+        putForks(philo);
+        printf("%s is done.", names[philo]);
     }
 }
 
