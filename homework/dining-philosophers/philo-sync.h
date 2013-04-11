@@ -6,9 +6,11 @@
 
 #include <pthread.h>
 #include <semaphore.h>
+#include <stdlib.h>
+#include "philo.h"
 
 pthread_mutex_t mutex;
-sem_t **forks = malloc( sizeof(sem_t) * FORK_AMOUNT );
+sem_t *forks[4];
 #ifndef __APPLE_CC__
 sem_t fork;
 #endif

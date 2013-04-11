@@ -11,31 +11,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const char *philosophers[] = {"Aristotle", "Locke", "Kant", "Kierkegaard", "Hobbes"};
+
 void exist(int philo) {
     while (1) {
         // Simulate the normal activities of a philosopher at dinner.
         //Think
-        printf("%s is thinking...", names[philo]);
+        printf("%s is thinking...\n", philosophers[philo]);
         randomwait(PHILOSOPHER_AMOUNT);
         
         getForks(philo);
         pthread_mutex_lock(&mutex);
         
         //Eat
-        printf("%s is eating...", names[philo]);
+        printf("%s is eating...\n", philosophers[philo]);
         randomwait(PHILOSOPHER_AMOUNT);
         pthread_mutex_unlock(&mutex);
         
         putForks(philo);
-        printf("%s is done.", names[philo]);
+        printf("%s is done.\n", philosophers[philo]);
     }
 }
 
 int left(int philosopher) {
-    return i;
+    return philosopher;
 }
 
 int right(int philosopher) {
-    return (i+1) % PHILOSOPHER_AMOUNT;
+    return (philosopher+1) % PHILOSOPHER_AMOUNT;
 }
 

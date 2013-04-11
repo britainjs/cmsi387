@@ -1,9 +1,9 @@
 philo: philo-harness.o philo-sync.o philo-cs.o producer.o utility.o
-	gcc -o bb *.o -lpthread
+	gcc -o philo *.o -lpthread
 
 philo-harness.o: philo-sync.h
 
-philo-cs.o: philo-cs.h philo.h
+philo-cs.o: philo-cs.h philo.h philo-sync.h
 
 philo-sync.o: philo-sync.h philo.h
 

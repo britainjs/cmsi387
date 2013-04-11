@@ -3,11 +3,13 @@
  */
 #include "philo-cs.h"
 #include "philo.h"
+#include "philo-sync.h"
 
 #include <stdio.h>
 #include <string.h>
 
-int* forkStatus = [1, 1, 1, 1, 1]
+int forkStatus[] = {1, 1, 1, 1, 1};
+const char *nameList[] = {"Aristotle", "Locke", "Kant", "Kierkegaard", "Hobbes"};
 
 int getForks(int philosopher) {
     int leftFork = left(philosopher);
@@ -19,7 +21,7 @@ int getForks(int philosopher) {
     } else {
         forkStatus[leftFork] = 0;
     }
-    printf("%s has fork %d\n", names[ philosopher ], forks[leftFork]);
+    printf("%s has fork %d\n", nameList[ philosopher ], leftFork);
     sem_wait(forks[rightFork]);
     if(forkStatus[rightFork] < 1) {
         printf("*** CRITICAL SECTION VIOLATION ***\n");
@@ -27,11 +29,11 @@ int getForks(int philosopher) {
     } else {
         forkStatus[rightFork] = 0;
     }
-    printf("%s has fork %d\n", names[ philosopher], forks[rightFork]);
+    printf("%s has fork %d\n", nameList[ philosopher], rightFork);
     return 0;
 }
 
-int putForks(int i) {
+int putForks(int philosopher) {
     int leftFork = left(philosopher);
     int rightFork = right(philosopher);
     
@@ -43,7 +45,7 @@ int putForks(int i) {
     }
     
     sem_post(forks[leftFork] );
-    printf("%s has put down fork %d\n", names[philosopher], forks[leftFork]);
+    printf("%s has put down fork %d\n", nameList[philosopher], leftFork);
     
     if(forkStatus[rightFork] > 0) {
         printf("*** CRITICAL SECTION VIOLATION***\n");
@@ -53,7 +55,7 @@ int putForks(int i) {
     }
     
     sem_post(forks[rightFork]);    
-    printf("%s has put down fork %d\n", names[philosopher], forks[rightFork]);
+    printf("%s has put down fork %d\n", nameList[philosopher], rightFork);
     
     return 0;
 }
