@@ -1,5 +1,5 @@
 address: addressTranslation.o addressTranslationTest.o
-	gcc -o address *.o -lpthread
+	gcc -o address *.o
 
 addressTranslation.o: addressTranslation.h
 

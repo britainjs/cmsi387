@@ -13,5 +13,20 @@ void setPageTable(pagetable *pt) {
 }
 
 int getPhysical(int logical) {
-    // TODO
+
+    if ( (logical < 0) || (logical >= 256) ) {
+        return -1;
+    }
+
+    int page = logical >> 4;
+    int offset = logical & 15;
+
+    if (ptr[page].valid == 0) {
+        return -2;
+    }
+
+    int physicalPage = (ptr[page].frame<<4) | offset;
+    
+    return physicalPage;
+
 }

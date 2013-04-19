@@ -4,6 +4,7 @@
 #include "addressTranslation.h"
 
 #include <assert.h>
+#include <stdio.h>
 
 int main(int argc, char *argv[]) {
     // Sample page table.
@@ -48,4 +49,6 @@ int main(int argc, char *argv[]) {
     assert(getPhysical(240) == ERR_INVALID);
     assert(getPhysical(249) == ERR_INVALID);
     assert(getPhysical(256) == ERR_OUT_OF_RANGE);
+
+    printf("All Pass!\n");
 }
