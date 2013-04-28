@@ -33,11 +33,15 @@ int main (int argc, char** argv) {
     pthread_attr_init(&attr);
     
     int i;
+    // JD: You had a PHILOSOPHER_AMOUNT constant yet here you have
+    //     a hardcoded literal.  Do stay consistent.
     for( i = 0; i < 5; i++ ) {
         pthread_create(&philosophers[i], &attr, sitDown, (void *)i);
         printf("%s has sat down\n", names[i]);
     }
-    
+
+    // JD: You need to wait for the threads to stop (pthread_join)!
+    //     Otherwise your program will end immediately.
     return 0;
 
 }

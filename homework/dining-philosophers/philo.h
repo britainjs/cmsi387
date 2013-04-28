@@ -5,6 +5,8 @@
 #define __PHILO__
 
 #define FORK_AMOUNT 5
+// JD: Why are there twice as many philosphers as
+//     there are forks?
 #define PHILOSOPHER_AMOUNT 10
 
 /**

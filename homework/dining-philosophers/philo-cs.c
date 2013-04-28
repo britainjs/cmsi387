@@ -9,9 +9,15 @@
 #include <string.h>
 
 int forkStatus[] = {1, 1, 1, 1, 1};
+// JD: Based on your last commit message, you were aware that this array
+//     is unnecessarily duplicated, and you are right.  Did you try
+//     putting this in a .h file that is included by both this file
+//     and philo-harness.c?  That would be the way to do it.
 const char *nameList[] = {"Aristotle", "Locke", "Kant", "Kierkegaard", "Hobbes"};
 
 int getForks(int philosopher) {
+    // JD: left and right, which were defined in producer.c, should
+    //     be declared in a .h file which this file would #include.
     int leftFork = left(philosopher);
     int rightFork = right(philosopher);
     sem_wait(forks[leftFork]);
