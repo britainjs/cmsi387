@@ -50,5 +50,7 @@ int main(int argc, char *argv[]) {
     assert(getPhysical(249) == ERR_INVALID);
     assert(getPhysical(256) == ERR_OUT_OF_RANGE);
 
+    // JD: Nice touch.  My original version was closer to the
+    //     "Rule of Silence" from ESR's Art of Unix Programming  :)
     printf("All Pass!\n");
 }

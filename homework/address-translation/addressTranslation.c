@@ -13,7 +13,13 @@ void setPageTable(pagetable *pt) {
 }
 
 int getPhysical(int logical) {
-
+    // JD: This is right, but better to use the PAGESIZE,
+    //     PAGEBITS, and PAGEMASK macros defined in the .h
+    //     file---if you do it that way, changing those
+    //     will automatically adapt your code to different
+    //     address register and page size settings.
+    //
+    //     Not to mention ERR_OUT_OF_RANGE and ERR_INVALID!
     if ( (logical < 0) || (logical >= 256) ) {
         return -1;
     }
@@ -22,6 +28,7 @@ int getPhysical(int logical) {
     int offset = logical & 15;
 
     if (ptr[page].valid == 0) {
+        // JD: ^^^ !ptr[page].valid works in C also :)
         return -2;
     }
 
