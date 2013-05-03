@@ -14,33 +14,44 @@ int main() {
         char input[256];
         char command[256];
         char modifier[256];
-        char current = command[0];
+        char current = 0;
         int index = 0;
         int length = 0;
 
         printf("Enter the command to run: ");
+        current = getchar();
+        /*
         scanf("%[^\n]%*c", input);
-        
+        printf("%s\n", input);*/
         //find the command
-        while(isspace(current) == 0) {
-            command[index] = input[index];
-            index = index + 1;
-            current = input[index];
-        }
         
-        current = input[index + 1];
-        index += 1;
-        int newIndex = 0;
-        
-        //find the modifier
-        // JD: What if the command has arguments (e.g., ls -l
-        //     or ping localhost)?
         while(isspace(current) == 0) {
-            modifier[newIndex] = input[index];
-            index = index + 1;
-            newIndex = newIndex + 1;
-            current = input[index];
+            command[index] = current;
+            current = getchar();
+            index += 1;
+            if (current == -1) {
+                printf("\n");
+                return 0;
+            }
         }
+
+        if (current != '\r' && current != '\n') {
+            current = getchar();
+            index = 0;
+            //find the modifier
+            // JD: What if the command has arguments (e.g., ls -l
+            //     or ping localhost)?
+            while(isspace(current) == 0) {
+                modifier[index] = current;
+                index += 1;
+                current = getchar();
+                if(current == -1) {
+                    printf("\n");
+                    return 0;
+                }
+            }
+        }
+        printf("Modifier is %s\n", modifier);
         /* Variable that will store the fork result. */
         pid_t pid;
         
@@ -57,7 +68,12 @@ int main() {
             //     about that...
             // JD: You should look up execlp (or the other forms of exec)
             //     in order to call this completely correctly.
-            execlp(command, command, NULL);
+            
+            if (strlen(modifier) > 1 ) {
+                execlp(command, command, modifier, NULL);
+            } else {
+                execlp(command, command, NULL);
+            }
         } else {
             /* Parent process. */
             int result;
