@@ -4,11 +4,12 @@
 #     You do invoke chdir instead of the executable, but you don't address the
 #     issue of how the change "never makes it back to the parent process."
 
-2. 
-
+2. Now that Ctrl-D is implemented, my shell can run scripts. Previously, it was unable to
+do so because of its lack of support for the EOF character.
 # JD: Here's a big hint: you are actually *this close* to being able to run scripts.
 #     Just deal with what you say in #3 below, and you'll be set.
 
 3. Ctrl-D closes the current shell by simulating an EOF input, but since our custom shell is actually a C program simulating a shell, it just keeps looping after an EOF input is received. In order to implement this command, we would have to tell the program to stop looping if it receives an EOF command.
+**UPDATE: My shell can now run Ctrl-D properly as checking for an EOF has been added.
 
 # JD: Again, nicely put in writing, but not reflected in your code.
