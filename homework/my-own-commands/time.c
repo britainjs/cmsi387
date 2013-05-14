@@ -12,8 +12,13 @@ int main(int argc, char *argv []) {
     //     (i.e., know when to use pointers and when not to do so)
     //     (hint: You made the wrong choices below)
     long int* result;
+    // JD: Well, your types *are* right but you aren't quite there
+    //     yet.  Answer this...so result is now a pointer to an int.
+    //     Which int?
+    //
+    //     (Hint: Look at how you fixed uname.c)
     printf("%d\n", syscall(13, result) );
-    
+
     //To show the use of the parameter
     printf("%ld\n", *result);
 }
