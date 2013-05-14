@@ -35,6 +35,10 @@ int main() {
             }
         }
 
+        // JD: This still parses incompletely.  You can't do more
+        //     than one argument, and if you enter a command with
+        //     an argument followed by a command without one, that
+        //     prior argument "sticks."
         if (current != '\r' && current != '\n') {
             current = getchar();
             index = 0;
@@ -77,7 +81,10 @@ int main() {
         } else {
             /* Parent process. */
             int result;
-            
+
+            // JD: This only catches & as the first character of the
+            //     first argument.  Unfortunately, that means
+            //     "ping localhost &" will not work.
             if (modifier[0] != '&') {
                 wait(&result);
             }

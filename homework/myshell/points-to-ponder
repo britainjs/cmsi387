@@ -11,5 +11,7 @@ do so because of its lack of support for the EOF character.
 
 3. Ctrl-D closes the current shell by simulating an EOF input, but since our custom shell is actually a C program simulating a shell, it just keeps looping after an EOF input is received. In order to implement this command, we would have to tell the program to stop looping if it receives an EOF command.
 **UPDATE: My shell can now run Ctrl-D properly as checking for an EOF has been added.
+# JD update: Your program isn't simulating a shell...it *is* one.  It's buggy
+#     and lacks features, yes, but it is still a shell.
 
 # JD: Again, nicely put in writing, but not reflected in your code.
